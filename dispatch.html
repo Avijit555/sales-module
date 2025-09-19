@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispatch Page</title>
+    <link rel="stylesheet" href="css/dispatch.css">
+    <link rel="icon" type="image/png" href="assets/favicon.ico">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="assets/image.png" alt="Hemraj Group Logo">
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Dashboard ▾</button>
+            <div class="dropdown-content">
+                <a href="index.html">Sales Dashboard</a>
+                <a href="burdwan-stock-dashboard.html">Burdwan Stock Dashboard</a>
+                <a href="katwa-stock-dashboard.html">Katwa Stock Dashboard</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Sales ▾</button>
+            <div class="dropdown-content">
+                <a href="order.html">Order</a>
+                <a href="dispatch.html">Dispatch</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Stock ▾</button>
+            <div class="dropdown-content">
+                <a href="burdwan-stock.html">Burdwan Stock</a>
+                <a href="katwa-stock.html">Katwa Stock</a>
+            </div>
+        </div>
+    </nav>
+
+   
+
+  <main>
+    <h1>Dispatch Page</h1>
+
+    <section class="card">
+      <h2>Create / Edit Dispatch</h2>
+
+      <form id="Dispatch" class="form-grid" autocomplete="off">
+        <!-- Form Fields -->
+        <div>
+          <label>Dispatch ID</label>
+          <input type="text" id="dispatchID" readonly />
+        </div>
+
+        <div>
+          <label>Dispatch Date</label>
+          <input type="date" id="dispatchDate" required />
+        </div>
+
+        <div>
+          <label>Dispatch Location</label>
+          <input type="text" id="dispatchLocation" required />
+        </div>
+
+        <div>
+          <label>Customer Type</label>
+          <select id="customerType">
+            <option value="direct">Direct</option>
+            <option value="broker">Broker</option>
+          </select>
+        </div>
+
+        <div id="brokerNameWrap" style="display:none">
+          <label>Broker Name</label>
+          <input type="text" id="brokerName" placeholder="Broker name" />
+        </div>
+
+        <div>
+          <label>Customer Name</label>
+          <input type="text" id="customerName" placeholder="Customer name" required />
+        </div>
+
+        <div>
+          <label>Rice Variant</label>
+          <select id="riceVariant">
+            <option value="basmati">Basmati</option>
+            <option value="non-basmati">Non Basmati</option>
+          </select>
+        </div>
+
+        <!-- Basmati -->
+        <div id="basmatiBlock" style="display:none">
+          <label>Basmati Product</label>
+          <select id="basmatiProduct">
+            <option value="">Select</option>
+            <option value="hemraj_xxxl">Hemraj XXXL Biriyani Rice</option>
+            <option value="shrivriddhi_xxl">Shrivriddhi XXL Biriyani</option>
+          </select>
+        </div>
+
+       
+
+        <!-- Non-Basmati -->
+        <div id="nonBasmatiBlock" style="display:none">
+          <label>Non-Basmati Product</label>
+          <select id="nonBasmatiProduct">
+            <option value="">Select</option>
+            <option value="hemraj">Hemraj</option>
+            <option value="shrivriddhi">Shrivriddhi</option>
+          </select>
+        </div>
+
+        <div id="nonBasmatiRiceTypeWrap" style="display:none">
+          <label>Rice Type</label>
+          <select id="nonBasmatiRiceType">
+            <option value="">Select</option>
+          </select>
+        </div>
+
+        <div id="nonBasmatiRiceNameWrap" style="display:none">
+          <label>Rice Name</label>
+          <select id="nonBasmatiRiceName">
+            <option value="">Select</option>
+          </select>
+        </div>
+
+        <div id="packagingWrap" style="display:none">
+          <label>Packaging Type</label>
+          <select id="packagingType">
+            <option value="Loose">Loose</option>
+            <option value="T.C.">T.C.</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Total Quantity (in Ton)</label>
+          <input type="number" id="quantity" min="0" step="0.01" value="0" />
+        </div>
+
+        <div>
+          <label>Rate (Per Ton)</label>
+          <input type="number" id="rate" min="0" step="0.01" value="0" />
+        </div>
+
+        <div>
+          <label>Cost (Qty * Rate)</label>
+          <input type="number" id="cost" readonly />
+        </div>
+
+        <div>
+          <label>Discount Type</label>
+          <select id="discountType">
+            <option value="0.025">2.5% discount</option>
+            <option value="0.02">2% discount</option>
+            <option value="0">0% discount</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Amount (after discount)</label>
+          <input type="number" id="amount" readonly />
+        </div>
+
+        <!-- Loading Info -->
+        <div class="grid-2">
+          <div>
+            <label for="loadingLocation">Loading Location</label>
+            <input type="text" id="loadingLocation" />
+          </div>
+          <div>
+            <label for="loadingMan">Loading Man Name</label>
+            <input type="text" id="loadingMan" />
+          </div>
+        </div>
+
+        <!-- Photos -->
+        <div class="grid-3">
+          <div>
+            <label for="challan">Challan No</label>
+            <input type="text" id="challan" />
+            <label for="challanPhoto">Challan Photo</label>
+            <input type="file" id="challanPhoto" accept="image/*" />
+            <img id="challanPreview" class="preview" alt="Challan Preview" />
+            <button type="button" class="tiny-btn" id="viewChallanBtn" style="display:none;">View</button>
+          </div>
+          <div>
+            <label for="carNo">Car No</label>
+            <input type="text" id="carNo" />
+            <label for="carPhoto">Car Photo</label>
+            <input type="file" id="carPhoto" accept="image/*" />
+            <img id="carPreview" class="preview" alt="Car Preview" />
+            <button type="button" class="tiny-btn" id="viewCarBtn" style="display:none;">View</button>
+          </div>
+        </div>
+
+        <!-- Net Weight & Driver -->
+        <div class="grid-3">
+          <div>
+            <label for="netWeight">Net Weight (kg)</label>
+            <input type="number" id="netWeight" step="0.01" />
+          </div>
+          <div>
+            <label for="driverContact">Driver Contact No</label>
+            <input type="text" id="driverContact" />
+          </div>
+        </div>
+
+        <!-- Advance & Due -->
+        <div class="grid-2">
+          <div>
+            <label for="advance">Advance</label>
+            <input type="number" id="advance" min="0" step="0.01" />
+          </div>
+          <div>
+            <label for="due">Due</label>
+            <input type="number" id="due" readonly />
+          </div>
+        </div>
+        <div>
+          <label for="dueDate">Due Date</label>
+          <input type="date" id="dueDate" />
+        </div>
+
+        <!-- Form Buttons -->
+        <div class="buttons">
+          <button type="submit" id="saveBtn">Save</button>
+          <button type="button" id="resetBtn">Reset</button>
+          <button type="button" id="cancelBtn">Cancel</button>
+        </div>
+
+        <div style="margin-left:auto; display:flex; gap:8px">
+          <button type="button" class="btn" id="exportCsv">Export CSV</button>
+          <button type="button" class="btn" id="exportPdf">Export PDF</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Dispatch Records -->
+    <section class="card" style="margin-top:18px">
+      <div class="toolbar">
+        <div class="filters">
+          <label class="muted">From</label>
+          <input type="date" id="filterFrom" />
+          <label class="muted">To</label>
+          <input type="date" id="filterTo" />
+          <label class="muted">Customer</label>
+          <input type="text" id="filterCustomer" placeholder="Customer name" />
+          <button id="applyFilters" class="btn btn-ghost">Apply</button>
+          <button id="clearFilters" class="btn btn-ghost">Clear</button>
+        </div>
+        <div class="muted">Total Dispatch: <span id="totalCount">0</span></div>
+      </div>
+
+      <section class="table-wrap">
+        <h2>Dispatch Records</h2>
+        <div style="overflow-x:auto;">
+          <table id="dispatchTable">
+            <thead>
+              <tr>
+                <th>D.ID</th>
+                <th>D.Date</th>
+                <th>D.Location</th>
+                <th>C.Type</th>
+                <th>Broker</th>
+                <th>Customer</th>
+                <th>Rice Variant</th>
+                <th>Rice Product</th>
+                <th>Rice Type</th>
+                <th>Rice Name</th>
+                <th>Packaging Type</th>
+                <th>Loading Location</th>
+                <th>Loading Man</th>
+                <th>Challan No</th>
+                <th>Challan Photo</th>
+                <th>Car No</th>
+                <th>Car Photo</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Cost</th>
+                <th>Discount</th>
+                <th>Amount</th>
+                <th>Advance</th>
+                <th>Due</th>
+                <th>Due Date</th>
+                <th>Net Wt(kg)</th>
+                <th>Driver Contact</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rows will be injected dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+
+  <!-- jsPDF libs for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+  <script src="js/dispatch.js"></script>
+</body>
+</html>

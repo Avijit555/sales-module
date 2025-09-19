@@ -1,0 +1,1 @@
+document.getElementById('stock-overview').innerText = 'Burdwan stock data';

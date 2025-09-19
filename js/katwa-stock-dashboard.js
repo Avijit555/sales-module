@@ -1,0 +1,1 @@
+document.getElementById('stock-overview').innerText = 'Katwa stock data';

@@ -1,0 +1,1 @@
+document.getElementById('orders-summary').innerText = 'Orders data here';

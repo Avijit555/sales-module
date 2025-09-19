@@ -1,0 +1,244 @@
+/* Navbar */
+
+.navbar {
+  background: linear-gradient(135deg, #1e90ff, #00bfff); /* Gradient background */
+  padding: 10px 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  margin: -19px -20px;
+  border-radius: 10px; /* Slightly rounded navbar edges */
+}
+
+.navbar .logo img {
+  height: 40px;
+  width: 40px; /* Ensure logo is circular */
+  border-radius: 50%; /* Round logo */
+  object-fit: cover; /* Ensure the image doesn't stretch */
+  margin-right: 20px;
+}
+
+.dropbtn {
+  background-color: #1e90ff;
+  color: white;
+  padding: 12px 18px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded button */
+  transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+.dropbtn:hover {
+  background-color: #0b63c1; /* Slightly darker blue on hover */
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* Softer shadow */
+  z-index: 1;
+  border-radius: 5px; /* Rounded edges for the dropdown */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px); /* Initial position for smoother animation */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth appearance */
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+  font-weight: 500; /* Slightly bolder text */
+  transition: background-color 0.2s ease, padding 0.2s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  padding-left: 20px; /* Subtle left padding on hover */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* Smooth dropdown slide-in */
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #0b63c1; /* Darker blue on hover */
+}
+/* ------------------------------------------------- */
+:root {
+  --accent: #0b63c1;
+  --muted: #6b7280;
+  --bg: #f6f8fb;
+  --card: #ffffff;
+}
+
+body {
+  font-family: Inter, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 0;
+  padding: 20px;
+  background: var(--bg);
+  color: #0f172a;
+}
+.container {
+  max-width: 1100px;
+  margin: 51px 90px;
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(20, 20, 50, 0.06);
+}
+h1 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #1e293b;
+}
+h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #334155;
+}
+section { margin-bottom: 32px; }
+
+/* ---------------- Forms & Filters ---------------- */
+.form-section, .filter-section {
+  display: flex;
+  gap: 16px;
+  background: #fafbff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  flex-wrap: wrap; /* allow wrapping if needed */
+}
+
+.row {
+  display: flex;               /* horizontal layout */
+  align-items: center;         /* vertically center label + input */
+  gap: 10px;                   /* spacing between label and input */
+  flex: 1 1 45%;               /* flexible width, adjust as needed */
+  min-width: 200px;            /* prevent too narrow fields */
+}
+
+.row label {
+  font-size: 13px;
+  color: #475569;
+  width: 120px;                /* fixed label width for alignment */
+  text-align: right;           /* align label text to the right */
+}
+
+.row input, .row select {
+  flex: 1;                     /* input fills remaining space */
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: #fff;
+}
+
+@media(max-width: 800px) {
+  .form-section, .filter-section {
+    flex-direction: column;    /* stack rows on mobile */
+  }
+  .row {
+    flex-direction: column;    /* label on top of input */
+    align-items: stretch;      /* full-width inputs */
+  }
+  .row label {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 6px;
+  }
+}
+
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.actions button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #0b68ff;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.actions button:hover { background: #084ec7; }
+.actions button#resetBtn { background: #6b7280; }
+.actions button#resetBtn:hover { background: #4b5563; }
+.export-actions { margin-top: 12px; }
+
+/* ---------------- Table ---------------- */
+.table-section {
+  background: #fafbff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  overflow-x: auto;   /* ✅ mobile scrolling */
+}
+.table-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  min-width: 700px;   /* ✅ prevents squishing */
+}
+.table-section th, .table-section td {
+  padding: 12px;
+  border-bottom: 1px solid #eef2f7;
+  text-align: left;
+  font-size: 14px;
+  white-space: nowrap; /* ✅ keeps text inline */
+}
+.table-section th {
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 600;
+}
+.action-btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  transition: opacity 0.2s ease;
+}
+.action-btn:hover { opacity: 0.85; }
+.edit-btn { background: #10b981; color: #fff; }
+.delete-btn { background: #ef4444; color: #fff; }
+
+/* ---------------- Responsive ---------------- */
+@media(max-width: 800px) {
+  .form-section, .filter-section {
+    grid-template-columns: 1fr; /* ✅ single column */
+  }
+  .actions { 
+    flex-direction: column; 
+    align-items: stretch;
+  }
+  .actions button {
+    width: 100%;  /* ✅ full-width buttons */
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .dropdown-content {
+    position: static;  /* ✅ dropdown works in column mode */
+    box-shadow: none;
+    min-width: 100%;
+  }
+}

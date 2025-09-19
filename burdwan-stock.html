@@ -1,0 +1,187 @@
+<html>
+
+<head>
+  <title>Burdwan Stock</title>
+  <link rel='stylesheet' href='css/burdwan-stock.css'>
+  <link rel="icon" type="image/png" href="assets/favicon.ico">
+</head>
+  <nav class='navbar'>
+    <div class="logo">
+      <img src="assets/image.png" alt="Hemraj Group Logo">
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Dashboard ▾</button>
+      <div class="dropdown-content">
+        <a href="index.html">Sales Dashboard</a>
+        <a href="burdwan-stock-dashboard.html">Burdwan Stock Dashboard</a>
+        <a href="katwa-stock-dashboard.html">Katwa Stock Dashboard</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Sales ▾</button>
+      <div class="dropdown-content">
+        <a href="order.html">Order</a>
+        <a href="dispatch.html">Dispatch</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Stock ▾</button>
+      <div class="dropdown-content">
+        <a href="burdwan-stock.html">Burdwan Stock</a>
+        <a href="katwa-stock.html">Katwa Stock</a>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  </head>
+
+  <body>
+    <main class="container">
+      <header class="page-header">
+        <h1>burdwan-stock </h1>
+      </header>
+
+      <section class="form-section">
+        <h2>Add / Edit Stock</h2>
+        <form id="stockForm">
+          <div class="row">
+            <label for="date">Date</label>
+            <input type="date" id="date" required>
+          </div>
+
+          <div class="row">
+            <label for="variant">Rice Variant</label>
+            <select id="variant" required>
+              <option value="">-- Select --</option>
+              <option value="Basmoti">Basmoti</option>
+              <option value="Non Basmoti">Non Basmoti</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="brand">Brand</label>
+            <select id="brand" required>
+              <option value="">-- Select --</option>
+              <option value="Hemraj">Hemraj</option>
+              <option value="Shrivriddhi">Shrivriddhi</option>
+            </select>
+          </div>
+
+          <div class="row" id="riceTypeRow" style="display:none;">
+            <label for="riceType">Rice Type</label>
+            <select id="riceType"></select>
+          </div>
+
+          <div class="row">
+            <label for="riceName">Rice Name</label>
+            <input list="riceNamesList" id="riceName" placeholder="Type rice name or select..." required>
+            <datalist id="riceNamesList"></datalist>
+          </div>
+
+          <div class="row">
+            <label for="quantity">Quantity (bags)</label>
+            <input type="number" id="quantity" min="0" value="0" required>
+          </div>
+
+          <!-- Basmoti: dropdown -->
+          <div class="row" id="kgDropdownRow">
+            <label for="kgPerBagSelect">Kg per bag</label>
+            <select id="kgPerBagSelect">
+              <option value="1">1 kg</option>
+              <option value="10">10 kg</option>
+              <option value="30">30 kg</option>
+            </select>
+          </div>
+
+          <!-- Non Basmoti: manual input -->
+          <div class="row" id="kgInputRow" style="display:none;">
+            <label for="kgPerBagInput">Kg per bag</label>
+            <input type="number" id="kgPerBagInput" min="1" placeholder="Enter kg per bag">
+          </div>
+
+          <div class="row">
+            <label for="ton">Ton</label>
+            <input type="number" id="ton" step="0.001" readonly>
+          </div>
+
+          <input type="hidden" id="editingIndex" value="-1">
+          <div class="actions">
+            <button type="submit">Save</button>
+            <button type="button" id="resetBtn">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Filters -->
+      <section class="filter-section">
+        <h2>Filters & Export</h2>
+        <div class="row">
+          <label for="filterDate">Date</label>
+          <input type="date" id="filterDate">
+        </div>
+        <div class="row">
+          <label for="filterVariant">Rice Product</label>
+          <select id="filterVariant">
+            <option value="">All</option>
+            <option value="Basmoti">Basmoti</option>
+            <option value="Non Basmoti">Non Basmoti</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="filterRiceType">Rice Type</label>
+          <select id="filterRiceType">
+            <option value="">All</option>
+            <option value="Puffed">Puffed</option>
+            <option value="Parboiled">Parboiled</option>
+            <option value="Raw">Raw</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="filterRiceName">Rice Name</label>
+          <input list="riceNamesList" id="filterRiceName" placeholder="Select or type name">
+        </div>
+
+        <div class="actions">
+          <button id="applyFilters">Apply Filters</button>
+          <button id="clearFilters">Clear Filters</button>
+        </div>
+
+        <div class="actions export-actions">
+          <button id="exportCsv">Export CSV</button>
+          <button id="exportPdf">Export PDF (filtered)</button>
+        </div>
+      </section>
+
+      <!-- Table -->
+      <section class="table-section">
+        <h2>Stock Records</h2>
+        <table id="stockTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Variant</th>
+              <th>Brand</th>
+              <th>Rice Type</th>
+              <th>Rice Name</th>
+              <th>Bags</th>
+              <th>Kg/Bag</th>
+              <th>Ton</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+      </div>
+
+
+      <script src="js/burdwan-stock.js"></script>
+  </body>
+
+</html>
